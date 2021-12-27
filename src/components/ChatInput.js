@@ -1,13 +1,16 @@
 import React, {useState} from 'react';
 import {useMessage} from "../context/MessageProvider";
+import {useContact} from "../context/ContactProvider";
 
-const ChatInput = () => {
+const ChatInput = ({sender}) => {
     const [text, setText] = useState('')
-    const {createMessage} = useMessage()
+    const {sendMessage} = useMessage()
+    const {contacts} = useContact()
+    const senderName = contacts.find(el => el.userId === sender).userName
 
     const submitHandler = (e) => {
         e.preventDefault()
-        if (text) createMessage(text)
+        if (text) sendMessage(text, sender, senderName)
         setText('')
     }
 

@@ -1,4 +1,4 @@
-import React, {useCallback, useContext, useEffect, useState} from 'react';
+import React, {useContext, useEffect} from 'react';
 import {useSocket} from "./SocketProvider";
 import useLocalStorage from "../components/hook/useLocalStorage";
 
@@ -12,20 +12,20 @@ const MessageProvider = ({children}) => {
     const [messages, setMessages] = useLocalStorage('message', [])
     const socket = useSocket()
 
-    const createMessage = (text) => {
-        socket.emit('send-message', text)
-        setMessages(prevState => [...prevState, text])
+    const sendMessage = (text, sender, senderName) => {
+        socket.emit('send-message', {text, sender, senderName})
     }
 
-    // useEffect(() => {
-    //     if (socket !== {}) {
-    //         socket.on('get-message', createMessage)
-    //     }
-    //     return () => socket.off('get-message')
-    // }, [socket])
+    useEffect(() => {
+        if (socket == null) return
+        socket.on('get-message', ({text, sender, senderName}) => {
+            setMessages(prevState => [...prevState, {text, sender, senderName}])
+        })
+        return () => socket.off('get-message')
+    }, [socket])
 
     return (
-        <MessageContext.Provider value={{messages, createMessage}}>
+        <MessageContext.Provider value={{messages, sendMessage}}>
             {children}
         </MessageContext.Provider>
     );

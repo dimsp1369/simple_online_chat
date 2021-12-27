@@ -22,6 +22,21 @@
       margin: 20px;
       font-size: 20px;
       border-bottom: 1px darkgrey solid;
+
+      &--ContactList {
+        display: flex;
+        flex-direction: column;
+
+        div {
+          flex-grow: 1;
+          padding-top: 10px;
+          padding-left: 15px;
+        }
+
+        button {
+          margin-bottom: 20px;
+        }
+      }
     }
 
     &__Credential {
@@ -63,10 +78,19 @@
     background: #e5d9d0;
   }
 
-  &__ChatMessage {
+  &__ChatMessage_FromMe {
     align-self: flex-end;
     background-color: darkgrey;
     color: white;
+    border-radius: 10px;
+    padding: 5px;
+    margin-top: 10px;
+    margin-right: 20px;
+  }
+
+  &__ChatMessage_FromOther {
+    align-self: flex-start;
+    background-color: white;
     border-radius: 10px;
     padding: 5px;
     margin-top: 10px;
@@ -95,6 +119,27 @@
       border-bottom-right-radius: 10px;
       border-top-right-radius: 10px;
     }
+  }
+}
+
+.Modal {
+  height: 100%;
+  width: 100%;
+  background-color: rgba(0, 0, 0, 0.4);
+  position: fixed;
+  top: 0;
+  left: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  pointer-events: none;
+  opacity: 0;
+  transition: 0.3s;
+
+
+  &__content {
+    display: grid;
+    justify-content: center;
   }
 }
 

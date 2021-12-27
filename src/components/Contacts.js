@@ -5,10 +5,16 @@ const Contacts = ({id}) => {
     const {contacts} = useContact()
 
     return (
-        <div>
-            Contacts:
-            {contacts.map(contact => <div key={contact.id}>{contact.id === id ? 'You' : contact.name}</div>)}
-        </div>
+        <>
+            <div className="SidePanelLayout__Content--ContactList">
+                <span> Contacts:</span>
+                <div>
+                    {contacts.map(contact => <div
+                        key={contact.userId}>{contact.userId === id ? `You: ${contact.userName}` : contact.userName}</div>)}
+                </div>
+                <button>Add contact</button>
+            </div>
+        </>
     );
 };
 

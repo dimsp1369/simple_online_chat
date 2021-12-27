@@ -9,10 +9,9 @@ io.on('connection', (socket) => {
     const id = socket.handshake.query.id
     socket.join(id)
     console.log('user connected')
-    socket.on('send-message', (text) => {
-        console.log('message: ' + text)
-        // io.emit('send-message', text)
-        socket.broadcast.emit('get-message', text)
+    socket.on('send-message', (data) => {
+        io.emit('get-message', data)
+        // socket.broadcast.emit('get-message', text)
     })
 })
 

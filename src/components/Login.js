@@ -1,6 +1,7 @@
 import React, {useRef} from 'react';
 import {v4 as uuidv4} from 'uuid'
 import {useContact} from "../context/ContactProvider";
+import {FormLabel} from "react-bootstrap";
 
 const Login = ({onSubmit}) => {
     const nameRef = useRef(null)
@@ -19,8 +20,8 @@ const Login = ({onSubmit}) => {
     return (
         <div className='LoginLayout'>
             <form onSubmit={createUser}>
-                <input ref={nameRef}/>
-                <button type='submit'>Create User</button>
+                <input ref={nameRef} placeholder='Enter your name...'/>
+                <button type='submit'>Login</button>
             </form>
         </div>
     );
